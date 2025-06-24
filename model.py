@@ -54,7 +54,7 @@ class VAE(nn.Module):
             nn.LeakyReLU(0.2),
 
             nn.ConvTranspose2d(32, 3, 4, stride=2, padding=1),     # 96x96
-            nn.Sigmoid()
+            nn.Tanh()
         )
 
     def reparameterize(self, mu, logvar):
@@ -71,3 +71,4 @@ class VAE(nn.Module):
         h = self.fc_decode(z).view(-1, 512, 3, 3)
         x_recon = self.decoder(h)
         return x_recon, mu, logvar
+

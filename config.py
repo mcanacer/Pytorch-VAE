@@ -38,9 +38,9 @@ def everything(args):
         transforms.Lambda(lambda t: (t * 2) - 1)  # Scale [-1, 1]
     ])
 
-    train_dataset = datasets.STL10(
+    train_dataset = datasets.CelebA(
         root='./data',
-        split='unlabeled',
+        split='train',
         download=True,
         transform=transform,
     )
@@ -74,3 +74,4 @@ def everything(args):
         'run': run,
         'checkpoint_path': args.checkpoint_path,
     }
+

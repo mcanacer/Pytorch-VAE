@@ -2,6 +2,7 @@ import sys
 import importlib
 
 import torch
+import torch.nn.functional as F
 
 
 def vae_loss(recon_x, x, mu, logvar):
@@ -58,3 +59,4 @@ if __name__ == '__main__':
     if len(sys.argv) == 1:
         raise ValueError('you must provide config file')
     main(sys.argv[1], sys.argv[2:])
+

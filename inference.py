@@ -30,20 +30,20 @@ def generate_samples(model, device, latent_dim, num_samples=8):
     with torch.no_grad():
         x_gen = model.decoder(model.fc_decode(z).view(-1, 512, 3, 3)).cpu()
 
+    x_gen = (x_gen + 1) / 2
+
     return x_gen
 
 
 def main(config_path, args):
     evy = get_everything(config_path, args)
 
-    loader = evy['train_loader']
-    model = evy['model']
     latent_dim = evy['latent_dim']
     device = evy['device']
 
     checkpoint_path = evy['checkpoint_path']
 
-    model.load_state_dict(torch.load(checkpoint_path, map_location=device))
+    model = torch.load(checkpoint_path, map_location=device, weights_only=False)
 
     x_gen = generate_samples(model, device, latent_dim)
 
@@ -55,3 +55,4 @@ if __name__ == '__main__':
     if len(sys.argv) == 1:
         raise ValueError('you must provide config file')
     main(sys.argv[1], sys.argv[2:])
+
