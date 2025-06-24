@@ -24,7 +24,7 @@ def show_reconstructions(model, data_loader, device, num_images=8):
     return x_recon
 
 
-def generate_samples(model, device, latent_dim, num_samples=8):
+def generate_samples(model, device, latent_dim, num_samples=40):
     model.eval()
     z = torch.randn(num_samples, latent_dim).to(device)
     with torch.no_grad():
@@ -48,7 +48,7 @@ def main(config_path, args):
     x_gen = generate_samples(model, device, latent_dim)
 
     for i in range(x_gen.shape[0]):
-        save_image(x_gen[i], f'Generated_image{i}.png')
+        save_image(x_gen[i], f'gen_images/generated_image{i}.png')
 
 
 if __name__ == '__main__':
