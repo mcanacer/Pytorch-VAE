@@ -20,8 +20,8 @@ def parse_args(args):
     parser.add_argument('--num-epochs', type=int, default=100)
 
     # Wandb
-    parser.add_argument('--projet', type=str, required=True)
-    parser.add_argument('--name', type=str, required=True)
+    parser.add_argument('--project', type=str, default='VAE')
+    parser.add_argument('--name', type=str, default='run_standard')
 
     # Save
     parser.add_argument('--checkpoint-path', type=str, required=True)
